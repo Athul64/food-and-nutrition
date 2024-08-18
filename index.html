@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Food and Nutrition Data</title>
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      border: 1px solid black;
+      padding: 8px;
+      text-align: left;
+    }
+    .action-buttons button {
+      margin-right: 5px;
+    }
+    #edit-form {
+      margin-top: 20px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>Food and Nutrition Data</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Food Group</th>
+        <th>Description</th>
+        <th>Calories</th>
+        <th>Protein</th>
+        <th>Fat</th>
+        <th>Carbs</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody id="foodTable">
+    </tbody>
+  </table>
+
+  <!-- Edit Form -->
+  <div id="edit-form">
+    <h2>Edit Food Item</h2>
+    <input type="hidden" id="edit-id">
+    <label for="edit-name">Name:</label>
+    <input type="text" id="edit-name">
+    <label for="edit-foodGroup">Food Group:</label>
+    <input type="text" id="edit-foodGroup">
+    <label for="edit-description">Description:</label>
+    <input type="text" id="edit-description">
+    <label for="edit-calories">Calories:</label>
+    <input type="number" id="edit-calories">
+    <label for="edit-protein">Protein:</label>
+    <input type="number" id="edit-protein">
+    <label for="edit-fat">Fat:</label>
+    <input type="number" id="edit-fat">
+    <label for="edit-carbs">Carbs:</label>
+    <input type="number" id="edit-carbs">
+    <button id="save-edit">Save</button>
+  </div>
+
+  <script>
+    // Fetch and display data
+    fetch('http://localhost:3000/api/food-items')
+      .then(response => response.json())
+      .then(data => {
+        const table = document.getElementById('foodTable');
+        data.forEach(item => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${item.name}</td>
+            <td>${item.foodGroup}</td>
+            <td>${item.description}</td>
+            <td>${item.nutritionalInfo.calories}</td>
+            <td>${item.nutritionalInfo.macronutrients.protein}</td>
+            <td>${item.nutritionalInfo.macronutrients.fat}</td>
+            <td>${item.nutritionalInfo.macronutrients.carbs}</td>
+            <td class="action-buttons">
+              <button onclick="editItem('${item._id}')">Update</button>
+              <button onclick="deleteItem('${item._id}')">Delete</button>
+            </td>
+          `;
+          table.appendChild(row);
+        });
+      })
+      .catch(error => console.error('Error fetching data:', error));
+
+    // Function to handle edit
+    function editItem(id) {
+      fetch(`http://localhost:3000/api/food-items/${id}`)
+        .then(response => response.json())
+        .then(item => {
+          document.getElementById('edit-id').value = item._id;
+          document.getElementById('edit-name').value = item.name;
+          document.getElementById('edit-foodGroup').value = item.foodGroup;
+          document.getElementById('edit-description').value = item.description;
+          document.getElementById('edit-calories').value = item.nutritionalInfo.calories;
+          document.getElementById('edit-protein').value = item.nutritionalInfo.macronutrients.protein;
+          document.getElementById('edit-fat').value = item.nutritionalInfo.macronutrients.fat;
+          document.getElementById('edit-carbs').value = item.nutritionalInfo.macronutrients.carbs;
+          document.getElementById('edit-form').style.display = 'block';
+        })
+        .catch(error => console.error('Error fetching item:', error));
+    }
+
+    // Save edited item
+    document.getElementById('save-edit').onclick = () => {
+      const id = document.getElementById('edit-id').value;
+      const name = document.getElementById('edit-name').value;
+      const foodGroup = document.getElementById('edit-foodGroup').value;
+      const description = document.getElementById('edit-description').value;
+      const calories = document.getElementById('edit-calories').value;
+      const protein = document.getElementById('edit-protein').value;
+      const fat = document.getElementById('edit-fat').value;
+      const carbs = document.getElementById('edit-carbs').value;
+
+      fetch(`http://localhost:3000/api/food-items/${id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name,
+          foodGroup,
+          description,
+          nutritionalInfo: {
+            calories,
+            macronutrients: {
+              protein,
+              fat,
+              carbs
+            }
+          }
+        })
+      })
+      .then(response => response.json())
+      .then(() => {
+        alert('Item updated successfully');
+        location.reload(); // Reload the page to show updated data
+      })
+      .catch(error => console.error('Error updating item:', error));
+    };
+
+    // Function to handle delete
+    function deleteItem(id) {
+      if (confirm('Are you sure you want to delete this item?')) {
+        fetch(`http://localhost:3000/api/food-items/${id}`, {
+          method: 'DELETE'
+        })
+        .then(response => response.json())
+        .then(() => {
+          alert('Item deleted successfully');
+          location.reload(); // Reload the page to show updated data
+        })
+        .catch(error => console.error('Error deleting item:', error));
+      }
+    }
+  </script>
+</body>
+</html>
