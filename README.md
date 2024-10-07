@@ -41,21 +41,23 @@ DELETE /api/foods/:id
 
 
 # Setup Instructions:
-1 *Clone the repository*.
+1. *Clone the repository*.
 ```bash
   git clone https://github.com/yourusername/food-and-nutrition
 ```
-2 *Install dependencies: npm install*.
+2. *Install dependencies: npm install*.
 ```bash
 npm i
 ```
-3 *Start the server: npm start*.
+3. *Start the server: npm start*.
 ```bash
 npm run dev
 ```
-4 *Open your browser* and go to http://locathost:5173 to see the application in action
-5 *Configure MongoDB connection*.
-6 *Use Postman to test API endpoints*.
+4. *Open your browser* and go to http://locathost:5173 to see the application in action
+
+5. *Configure MongoDB connection*.
+
+6. *Use Postman to test API endpoints*.
   
 # Deployed Version:
   Deployed Link: [Food and Nutrition](https://athul64.github.io/food-and-nutrition/)
