@@ -30,4 +30,3 @@ This project is a RESTful API developed using Express.js, MongoDB, HTML, CSS, an
   
 # Deployed Version:
   Deployed Link: Food and Nutrition
-  Check out the live version of the application.
