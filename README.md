@@ -1,6 +1,6 @@
 # Food and Nutrition Data Management API
 
-This project is a RESTful API developed using Express.js, MongoDB, HTML, CSS, and JavaScript to manage food and nutrition data. The API allows users to perform CRUD operations (Create, Read, Update, Delete) on food items, making it easy to manage detailed nutritional information and related attributes.
+This project is a RESTful API developed using Express.js, MongoDB, HTML, CSS, and JavaScript to manage food and nutrition data. The API allows users to perform CRUD operations (Create, Read, Update, Delete) on food items, making managing detailed nutritional information and related attributes easy.
 
 # Features:
 
@@ -16,11 +16,28 @@ This project is a RESTful API developed using Express.js, MongoDB, HTML, CSS, an
 - **Frontend**: HTML, CSS, and JavaScript.
 - **Testing**: Postman for API testing.
 # API Endpoints:
-- POST /food - Add a new food item
-- GET /food - Retrieve all food items
-- GET /food/:id - Retrieve a specific food item by ID
-- PUT /food/:id - Update a food item by ID
-- DELETE /food/:id - Delete a food item by ID
+ - Add a new food item
+``` HTTP
+   POST /api/foods
+```
+ - Retrieve all food items
+ ```HTTP
+   GET /
+```
+- Retrieve a specific food item by ID
+```HTTP
+   GET /api/foods/:id
+```
+- Update a food item by ID
+```HTTP
+    PUT /api/foods/:id
+```
+- Delete a food item by ID
+```HTTP
+    DELETE /api/foods/:id
+```
+
+
 # Setup Instructions:
 - Clone the repository.
 - Install dependencies: npm install.
@@ -29,4 +46,4 @@ This project is a RESTful API developed using Express.js, MongoDB, HTML, CSS, an
 - Use Postman to test API endpoints.
   
 # Deployed Version:
-  Deployed Link: Food and Nutrition
+  Deployed Link: [Food and Nutrition](https://athul64.github.io/food-and-nutrition/)
