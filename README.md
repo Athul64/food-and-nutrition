@@ -27,8 +27,7 @@ This project is a RESTful API developed using Express.js, MongoDB, HTML, CSS, an
 - Configure MongoDB connection.
 - Start the server: npm start.
 - Use Postman to test API endpoints.
-
   
 # Deployed Version:
-- Deployed Link: Food and Nutrition
-- Check out the live version of the application.
+  Deployed Link: Food and Nutrition
+  Check out the live version of the application.
