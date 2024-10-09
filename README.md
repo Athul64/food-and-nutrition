@@ -1,4 +1,4 @@
-# Food and Nutrition Data Management API
+# Food and Nutrition Data Management API - Frontend
 
 This project is a RESTful API developed using Express.js, MongoDB, HTML, CSS, and JavaScript to manage food and nutrition data. The API allows users to perform CRUD operations (Create, Read, Update, Delete) on food items, making managing detailed nutritional information and related attributes easy.
 
